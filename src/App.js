@@ -1,25 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import { Button } from "@material-ui/core";
+import VideoCall from "./components/VideoCall";
+import AudioCall from "./components/AudioCall";
+import RmtMessaning from "./components/RmtMessaning";
+const App = () => {
+  const [inVideoCall, setInVideoCall] = useState(false);
+  const [inAudioCall, setInAudioCall] = useState(false);
 
-function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <div className="App" style={{ height: "100%" }}>
+      {inVideoCall ? (
+        <VideoCall setInVideoCall={setInVideoCall} />
+      ) : (
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => {
+            setInVideoCall(true);
+          }}
         >
-          Learn React
-        </a>
-      </header>
+          Join Video Call
+        </Button>
+      )}
+      {inAudioCall ? (
+        <AudioCall setInAudioCall={setInAudioCall} />
+      ) : (
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => {
+            setInAudioCall(true);
+          }}
+        >
+          Join Audio Call
+        </Button>
+      )}
+      <RmtMessaning/>
     </div>
   );
-}
+};
 
 export default App;
